@@ -1,13 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=s, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 
-<script src="book.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav">
+            <div class="nav-content">
+                <div class="title">Library</div>
+                <div class="right">
+                    <button>+</button>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th># of pages</th>
+                        <th>Status</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>Naruto</td>
+                    <td>Musashi Kishimoto</td>
+                    <td>100</td>
+                    <td>Read</td>
+                    <td>X</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="book.js"></script>
 </body>
+
 </html>

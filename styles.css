@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+.title {
+    color: white;
+    font-size: 36px;
+}
+
+.container {
+    display: grid;
+    background-color: #0F141B;
+    grid-template-rows: min-content auto;
+    height: 100vh;
+}
+
+.nav {
+    height: 45px;
+    background-color: #252930;
+}
+
+.nav-content {
+    display: grid;
+    width: 950px;
+    margin: 0 auto;
+    height: 100%;
+    grid-template-columns: auto auto;
+}
+
+.right {
+    display: grid;
+    justify-content: end;
+    align-items: center;
+}
+.nav-content button {
+    border: none;
+    background-color: #6EACF6;
+    width: 80px;
+    height: 30px;
+    border-radius: 100px;
+}
+
+.main {
+    background-color: #0F141B;
+    width: 950px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.main table {
+    width: 100%;
+    color: white;
+    border-collapse: collapse;
+}
+
+.main table th {
+    font-weight: 100;
+    font-size: 22px;
+    border-bottom: solid 2px #45494F;
+    vertical-align: bottom
+
+}
+.main table td {
+    color:#8F9296;
+}
+
+.main table tr {
+    height: 100px;
+}
+
+.main table td {
+    font-weight: 100;
+    font-size: 18px;
+    border-bottom: solid 2px #45494F;
+}
+
+.main thead tr :nth-child(1), .main thead tr :nth-child(2) {
+    text-align: left;
+}
+
+.main tr :nth-child(n+3){
+    text-align: center;
+}
