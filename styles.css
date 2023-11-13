@@ -3,9 +3,13 @@ body {
     padding: 0;
     font-family: 'Inter', sans-serif;
 }
+
 .title {
+    display: grid;
+    align-items: center;
     color: white;
     font-size: 36px;
+    font-family: 'Alata', sans-serif;
 }
 
 .container {
@@ -16,7 +20,7 @@ body {
 }
 
 .nav {
-    height: 45px;
+    height: 64px;
     background-color: #252930;
 }
 
@@ -33,12 +37,21 @@ body {
     justify-content: end;
     align-items: center;
 }
+
 .nav-content button {
     border: none;
     background-color: #6EACF6;
     width: 80px;
     height: 30px;
     border-radius: 100px;
+}
+
+.nav-content button:hover, #confirmBtn:hover, #cancelBtn:hover {
+    background-color: #4388cf;
+}
+
+.nav-content button:active {
+    opacity: .5;
 }
 
 .main {
@@ -59,10 +72,10 @@ body {
     font-size: 22px;
     border-bottom: solid 2px #45494F;
     vertical-align: bottom
-
 }
+
 .main table td {
-    color:#8F9296;
+    color: #8F9296;
 }
 
 .main table tr {
@@ -75,10 +88,73 @@ body {
     border-bottom: solid 2px #45494F;
 }
 
-.main thead tr :nth-child(1), .main thead tr :nth-child(2) {
+.main thead tr :nth-child(1),
+.main thead tr :nth-child(2) {
     text-align: left;
 }
 
-.main tr :nth-child(n+3){
+.main tr :nth-child(n+3) {
     text-align: center;
+}
+
+.read {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #45494F;
+    color: #8F9296;
+    width: fit-content;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+}
+
+#bookDialog {
+    padding: 30px 50px;
+    width: 400px;
+    background-color: #0F141B;
+    color: #FFFFFF;
+    border: none;
+}
+
+#bookDialog form {
+    display: grid;
+    gap: 20px;
+}
+
+#bookDialog form input[type='text'] {
+    border: none;
+    background-color: #2e3339;
+    border-radius: 3px;
+    padding: 7px;
+    color: #8F9296;
+}
+
+#confirmBtn, #cancelBtn {
+    border: none;
+    width: 80px;
+    height: 30px;
+    background-color: #6EACF6;
+}
+.confirm {
+    padding-top: 50px;
+    display: flex;
+    gap: 10px;
+}
+.input {
+    display: grid;
+    gap: 10px;
+}
+
+::backdrop {
+    background-color: black;
+    opacity: 0.50;
 }
