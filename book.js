@@ -10,9 +10,10 @@ const placeholder2 = new Book('One Piece', "Oda", 100, true);
 const placeholder3 = new Book('Bleach', "Kubo", 100, false);
 myLibrary.push(placeholder, placeholder2, placeholder3);
 
-
 updateTable();
 remove();
+updateStatus();
+
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -46,6 +47,14 @@ function clearInput() {
     status.value = 'read';
 }
 
+function updateStatus() {
+    const selects = document.querySelectorAll(".main select")
+    selects.forEach(select => {
+        select.addEventListener("change", () => {
+            myLibrary[select.dataset.index].read = checkStatus(select.value);
+        })
+    });
+}
 function updateTable() {
     const tbody = document.querySelector("tbody");
     tbody.textContent = '';
@@ -72,9 +81,10 @@ function updateTable() {
         select.append(option);
         select.append(option2);
         status.append(select);
+        select.dataset.index = i;
+
         select.value = setStatus(myLibrary[i].read);
         select.classList.add('read');
-
 
         const span = document.createElement('span');
         span.textContent = 'close';
@@ -99,7 +109,7 @@ function remove() {
     removeBtns.forEach(removeBtn => {
         removeBtn.addEventListener('click', (e) => {
             myLibrary.splice(e.target.dataset.index, 1);
-            const query = "[data-index=\""+e.target.dataset.index + "\" ]";
+            const query = "[data-index=\"" + e.target.dataset.index + "\" ]";
             const row = document.querySelector(query);
             row.remove();
         });
@@ -131,5 +141,6 @@ confirmBtn.addEventListener("click", (event) => {
     addBookToLibrary();
     updateTable();
     remove();
+    updateStatus(); 
     bookDialog.close(); // Have to send the select box value here.
 });
