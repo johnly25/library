@@ -16,7 +16,7 @@ body {
     display: grid;
     background-color: #0F141B;
     grid-template-rows: min-content auto;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .nav {

@@ -12,8 +12,7 @@ myLibrary.push(placeholder, placeholder2, placeholder3);
 
 
 updateTable();
-addRemoveButton();
-
+remove();
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -89,9 +88,22 @@ function updateTable() {
         row.append(pages);
         row.append(status);
         row.append(close);
+        row.dataset.index = i;
         tbody.append(row);
     }
 
+}
+
+function remove() {
+    const removeBtns = document.querySelectorAll(".closeBtn");
+    removeBtns.forEach(removeBtn => {
+        removeBtn.addEventListener('click', (e) => {
+            myLibrary.splice(e.target.dataset.index, 1);
+            const query = "[data-index=\""+e.target.dataset.index + "\" ]";
+            const row = document.querySelector(query);
+            row.remove();
+        });
+    });
 }
 
 function setStatus(read) {
@@ -106,8 +118,6 @@ function checkStatus(status) {
     return status == 'read';
 }
 
-
-
 addButton.addEventListener("click", () => {
     bookDialog.showModal();
 });
@@ -116,19 +126,10 @@ cancelBtn.addEventListener("click", () => {
     clearInput();
 });
 
-function addRemoveButton() {
-    const removeBtns = document.querySelectorAll(".closeBtn");
-    removeBtns.forEach(removeBtn => {
-        removeBtn.addEventListener('click', () => {
-            console.log("hello");
-        });
-    });
-}
-
 confirmBtn.addEventListener("click", (event) => {
     event.preventDefault(); // We don't want to submit this fake form
     addBookToLibrary();
     updateTable();
-    addRemoveButton();
+    remove();
     bookDialog.close(); // Have to send the select box value here.
 });
