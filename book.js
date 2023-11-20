@@ -111,6 +111,7 @@ class Display {
         const addButton = document.getElementById("add-btn");
         const confirmBtn = document.getElementById("confirmBtn");
         const cancelBtn = document.getElementById("cancelBtn");
+        const bookDialog = document.querySelector("dialog");
 
         addButton.addEventListener("click", () => {
             bookDialog.showModal();
@@ -133,7 +134,6 @@ class Display {
         const removes = document.querySelectorAll('.closeBtn');
         removes.forEach((remove) => {
             remove.addEventListener("click", (e) => {
-                console.log(e.target.dataset.index);
                 this.myLibrary.library.splice(e.target.dataset.index, 1);
                 this.updateScreen();
             });
