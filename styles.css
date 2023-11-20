@@ -149,6 +149,7 @@ body {
     display: flex;
     gap: 10px;
 }
+
 .input {
     display: grid;
     gap: 10px;
