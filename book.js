@@ -117,7 +117,7 @@ class Display {
         });
 
         cancelBtn.addEventListener("click", () => {
-            clearInput();
+            this.clearInput();
         });
 
         confirmBtn.addEventListener("click", (event) => {
