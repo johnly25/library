@@ -30,6 +30,7 @@ class Display {
         this.myLibrary.library.push(placeholder2);
         this.myLibrary.library.push(placeholder3);
         this.updateScreen();
+        this.addButtonListeners();
     }
 
     updateScreen() {
@@ -47,10 +48,11 @@ class Display {
                 tr.append(td);
             }
             let td = document.createElement('td');
-            td = this.addRemove(td);
+            td = this.addRemove(td,i);
             tr.append(td);
             tbody.append(tr);
         }
+        this.addRemoveListeners();
     }
 
     addSelect(td, read) {
@@ -73,16 +75,15 @@ class Display {
         return td;
     }
 
-    addRemove(td) {
+    addRemove(td,index) {
         const span = document.createElement('span');
         span.textContent = 'close';
         span.classList.add('material-symbols-outlined');
         span.classList.add('closeBtn');
-        //span.dataset.index = i;
+        span.dataset.index = index;
         td.append(span);
         return td;
     }
-
 
     clearInput() {
         const title = document.getElementById('title')
@@ -94,6 +95,50 @@ class Display {
         pages.value = '';
         status.value = 'read';
     }
+
+    addBookToLibrary() {
+        const title = document.getElementById('title')
+        const author = document.getElementById('author');
+        const pages = document.getElementById('pages');
+        const status = document.getElementById('read');
+        const book = new Book(title.value,author.value,pages.value,status.value == 'read' ? true : false);
+        this.myLibrary.library.push(book);
+    }
+
+    addButtonListeners() {
+        const addButton = document.getElementById("add-btn");
+        const confirmBtn = document.getElementById("confirmBtn");
+        const cancelBtn = document.getElementById("cancelBtn");
+
+        addButton.addEventListener("click", () => {
+            bookDialog.showModal();
+        });
+
+        cancelBtn.addEventListener("click", () => {
+            clearInput();
+        });
+
+        confirmBtn.addEventListener("click", (event) => {
+            event.preventDefault(); // We don't want to submit this fake form
+            this.addBookToLibrary();
+            this.updateScreen();
+            this.clearInput();
+            bookDialog.close(); 
+        });
+    }
+
+    addRemoveListeners() {
+        const removes = document.querySelectorAll('.closeBtn');
+        removes.forEach((remove) => {
+            remove.addEventListener("click", (e) => {
+                console.log(e.target.dataset.index);
+                this.myLibrary.library.splice(e.target.dataset.index, 1);
+                this.updateScreen();
+            })
+        })
+    }
+
+
 }
 
 const display = new Display();
