@@ -41,7 +41,7 @@ class Display {
             for (const key in this.myLibrary.library[i]) {
                 let td = document.createElement('td');
                 if (key == 'read') {
-                    td = this.addSelect(td, this.myLibrary.library[i][key]);
+                    td = this.addSelect(td, this.myLibrary.library[i][key],i);
                 } else {
                     td.textContent = this.myLibrary.library[i][key];
                 }
@@ -53,9 +53,10 @@ class Display {
             tbody.append(tr);
         }
         this.addRemoveListeners();
+        this.addStatusListener();
     }
 
-    addSelect(td, read) {
+    addSelect(td, read, index) {
         const select = document.createElement('select');
         const option = document.createElement('option');
         const option2 = document.createElement('option');
@@ -65,6 +66,7 @@ class Display {
         option2.textContent = 'Unread';
         select.append(option);
         select.append(option2);
+        select.dataset.index = index;
         select.classList.add('read');
         td.append(select);
         if (read) {
@@ -133,6 +135,17 @@ class Display {
             remove.addEventListener("click", (e) => {
                 console.log(e.target.dataset.index);
                 this.myLibrary.library.splice(e.target.dataset.index, 1);
+                this.updateScreen();
+            });
+        });
+    }
+
+    addStatusListener() {
+        const statuses = document.querySelectorAll('.main select');
+        statuses.forEach((status) => {
+            status.addEventListener("change", (e) => {
+                this.myLibrary.library[e.target.dataset.index].read = (e.target.value == "read" ? true : false);
+                console.log(this.myLibrary);
                 this.updateScreen();
             })
         })
