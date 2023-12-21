@@ -41,14 +41,14 @@ class Display {
             for (const key in this.myLibrary.library[i]) {
                 let td = document.createElement('td');
                 if (key == 'read') {
-                    td = this.addSelect(td, this.myLibrary.library[i][key],i);
+                    td = this.addSelect(td, this.myLibrary.library[i][key], i);
                 } else {
                     td.textContent = this.myLibrary.library[i][key];
                 }
                 tr.append(td);
             }
             let td = document.createElement('td');
-            td = this.addRemove(td,i);
+            td = this.addRemove(td, i);
             tr.append(td);
             tbody.append(tr);
         }
@@ -77,7 +77,7 @@ class Display {
         return td;
     }
 
-    addRemove(td,index) {
+    addRemove(td, index) {
         const span = document.createElement('span');
         span.textContent = 'close';
         span.classList.add('material-symbols-outlined');
@@ -103,7 +103,7 @@ class Display {
         const author = document.getElementById('author');
         const pages = document.getElementById('pages');
         const status = document.getElementById('read');
-        const book = new Book(title.value,author.value,pages.value,status.value == 'read' ? true : false);
+        const book = new Book(title.value, author.value, pages.value, status.value == 'read' ? true : false);
         this.myLibrary.library.push(book);
     }
 
@@ -119,15 +119,32 @@ class Display {
 
         cancelBtn.addEventListener("click", () => {
             this.clearInput();
+            bookDialog.close();
         });
 
         confirmBtn.addEventListener("click", (event) => {
             event.preventDefault(); // We don't want to submit this fake form
-            this.addBookToLibrary();
-            this.updateScreen();
-            this.clearInput();
-            bookDialog.close(); 
+            if (this.checkInput("title") && this.checkInput("author")) {
+                this.addBookToLibrary();
+                this.updateScreen();
+                this.clearInput();
+                bookDialog.close();
+            }
+
         });
+    }
+
+    checkInput(input) {
+        let check = document.getElementById(input);
+        console.log(check.validity.valueMissing);
+        if (check.validity.valueMissing) {
+            check.setCustomValidity("required");
+            check.reportValidity();
+            return false;
+        }
+        check.setCustomValidity("");
+        check.reportValidity();
+        return true;
     }
 
     addRemoveListeners() {
@@ -150,8 +167,6 @@ class Display {
             })
         })
     }
-
-
 }
 
 const display = new Display();
